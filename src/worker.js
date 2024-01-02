@@ -114,6 +114,7 @@ router
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${api_key}`,
+          "api-key": `Bearer ${api_key}`,
         },
         body: JSON.stringify(request.ai_params),
       }).catch(function(error){
