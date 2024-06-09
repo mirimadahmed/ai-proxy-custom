@@ -108,12 +108,12 @@ router
       var ai_url = request.ai_url || ("https://api.openai.com" + endpoint)
 
       console.log(`OpenAI endpoint: ${ai_url}`)
-
+      const finalKey = api_key.startsWith('Token') ? api_key : `Bearer ${api_key}`;
       var response = await fetch(ai_url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${api_key}`,
+          Authorization: finalKey,
           "api-key": `${api_key}`,
         },
         body: JSON.stringify(request.ai_params),
@@ -151,14 +151,14 @@ router
       var ai_url = request.ai_url || ("https://openrouter.ai" + endpoint)
 
       console.log(`OpenRouter endpoint: ${ai_url}`)
-
+      const finalKey = api_key.startsWith('Token') ? api_key : `Bearer ${api_key}`;
       var response = await fetch(ai_url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "HTTP-Referer": decodeURIComponent(request.query.referer),
           "x-title": request.query.title,
-          Authorization: `Bearer ${api_key}`,
+          Authorization: finalKey,
         },
         body: JSON.stringify(request.ai_params),
       }).catch(function(error){
